@@ -6,7 +6,7 @@ import telepot.helper
 import telepot.delegate
 import telepot.exception
 from telepot import delegate
-import twitterbot_config
+import twitterfeed
 
 ###
 
@@ -105,9 +105,11 @@ class TwitterBotDelegatorBot(telepot.DelegatorBot):
 
     """
     # On-idle timeout in seconds
-    on_idle_timeout = twitterbot_config.ON_IDLE_TIMEOUT
+    on_idle_timeout = 60*60
     
-    def __init__(self, token, authorized_users):
+    def __init__(self, token, authorized_users, on_idle_timeout=None):
+        if on_idle_timeout is not None:
+            self.on_idle_timeout = on_idle_timeout
         super(TwitterBotDelegatorBot, self).__init__(
             token, [
                 # Here is a delegate to specially handle owner commands.
@@ -124,9 +126,10 @@ class TwitterBotDelegatorBot(telepot.DelegatorBot):
 ###
 
 def main(config):
-    
+
     bot = TwitterBotDelegatorBot(config.TELEGRAM_BOT_TOKEN,
-                                 config.AUTHORIZED_USERS)
+                                 config.AUTHORIZED_USERS,
+                                 config.ON_IDLE_TIMEOUT)
     bot.message_loop(run_forever='TwitterBot listening ...')
 
 ###
