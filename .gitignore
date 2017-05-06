@@ -1,0 +1,7 @@
+ct-bot
+*.pyc
+*.pyo
+pyenv
+*~
+*.bak
+twitterbot_config.py
