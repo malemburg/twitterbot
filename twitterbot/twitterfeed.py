@@ -124,9 +124,10 @@ class TwitterFeedThread(threading.Thread):
             if 'text' not in msg:
                 # Not a status update, so skip this...
                 continue
-            self.send_message(u'Received tweet from @%s:\n%s' % (
+            self.send_message(u'_Received tweet from @%s:_\n%s' % (
                 msg['user']['screen_name'],
-                msg['text']))
+                msg['text']),
+                parse_mode='Markdown')
 
     def send_text_tweet(self, text):
 

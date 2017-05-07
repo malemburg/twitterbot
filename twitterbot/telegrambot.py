@@ -12,15 +12,13 @@ from twitterbot import twitterfeed
 ### Constants
 
 HELP = """\
-Welcome to the TwitterBot Telegram Bot
-======================================
+*Welcome to the TwitterBot Telegram Bot*
 
-Available commands:
+_Available commands:_
 
-/connect   - connect to the configured Twitter account
+/connect - connect to the configured Twitter account
 /tweet msg - tweet msg to the connected Twitter account
-/help      - this text
-
+/help - this text
 """
 
 ###
@@ -54,7 +52,8 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
         """
         # Remember the .chat_type of this chat
         (content_type, self.chat_type, chat_id) = telepot.glance(initial_msg)
-        self.sender.sendMessage("Hello, I am the TwitterBot (chat %s)" % chat_id)
+        self.sender.sendMessage("Hello, I am the TwitterBot (_chat %s_)" %
+                                chat_id, parse_mode='Markdown')
         print ('Telegram chat %r started' % chat_id)
 
     def on_chat_message(self, msg):
@@ -106,7 +105,8 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
             The idle timeout is set in the TwitterBotDelegatorBot.
 
         """
-        self.sender.sendMessage('Bye bye.')
+        self.sender.sendMessage(
+            'No activity, so terminating the bot. Bye bye.')
 
         # Terminate the chat in case it is idling
         raise telepot.exception.IdleTerminate(event['_idle']['seconds'])
@@ -116,6 +116,7 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
         """ Method called when the chat is closed.
 
         """
+        self.sender.sendMessage('TwitterBot is leaving the chat.')
         self.twitter.run = False
         # We should wait for the thread to terminate, but this can
         # take very long (until the user posts a new tweet), so we
@@ -133,7 +134,7 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
     def handle_help_command(self, msg, entity):
 
         print ('Help command called')
-        self.sender.sendMessage(HELP)
+        self.sender.sendMessage(HELP, parse_mode='Markdown')
 
     def handle_tweet_command(self, msg, entity):
 
