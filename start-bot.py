@@ -1,4 +1,5 @@
-from twitterbot.twitterbot import main
+import twitterbot.telegrambot
 import twitterbot_config
 
-main(twitterbot_config)
+# Run Telegram Bot forever
+twitterbot.telegrambot.main(twitterbot_config)
