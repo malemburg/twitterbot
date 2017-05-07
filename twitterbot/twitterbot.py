@@ -16,10 +16,9 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
 
     """
 
-    # Chat ID
-    chat_id = None
+    # .chat_id is provided by the ChatContext as property 
 
-    # Chat type ('private' or 'group')
+    # Chat type ('private', 'group', 'channel')
     chat_type = 'private'
 
     def __init__(self, *args, **kws):
@@ -30,12 +29,10 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
         """ Method called when a new chat is started.
 
         """
-        # Use the initial message to access the .chat_type and
-        # .chat_id
-        (content_type,
-         self.chat_type, self.chat_id) = telepot.glance(initial_msg)
+        # Remember the .chat_type of this chat
+        (content_type, self.chat_type, chat_id) = telepot.glance(initial_msg)
         self.sender.sendMessage("Hello, I am the TwitterBot")
-
+ 
     def on_chat_message(self, msg):
 
         """ Method called for every message sent to the bot.
@@ -86,6 +83,13 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
 
         # Terminate the chat in case it is idling
         raise telepot.exception.IdleTerminate(event['_idle']['seconds'])
+
+    def on_close(self, msg):
+
+        """ Method called when the chat is closed.
+
+        """
+        return True
 
     ### Bot command handlers
 
