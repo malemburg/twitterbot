@@ -1,0 +1,76 @@
+Notes for the Telegram TwitterBot
+=================================
+
+PyDDF Spring Sprint 2017
+------------------------
+2017-05-06 and 2017-05-07
+
+Started project.
+
+Participants:
+- Philipp v.d. Bussche
+- Marc-Andre Lemburg
+
+Resources:
+----------
+
+Telegram API:
+- API docs: https://core.telegram.org/bots/api
+- Bot FAQ: https://core.telegram.org/bots/faq
+- Telegram message format: https://core.telegram.org/bots/api#message
+
+Telegram bot c't project
+- Github: https://github.com/ola-ct/surveillancebot/
+
+Telegram Python package "telepot":
+- Github: https://github.com/nickoala/telepot/
+- Example chatbot: https://github.com/nickoala/telepot/blob/master/examples/chat/chatbox_nodb.py
+- Delegation: https://github.com/nickoala/telepot/blob/master/telepot/delegate.py
+- Helpers: https://github.com/nickoala/telepot/blob/master/telepot/helper.py
+
+Twitter Python package "twitter" (Python Twitter Tools):
+- Homepage: http://mike.verdone.ca/twitter/
+- Github: https://github.com/sixohsix/twitter
+- OAuth credential APIs: https://github.com/sixohsix/twitter/blob/master/twitter/oauth_dance.py
+
+Twitter API:
+- Developer site: https://dev.twitter.com/
+- API rate limits: https://dev.twitter.com/rest/public/rate-limiting
+- User streams: https://dev.twitter.com/streaming/userstreams
+
+Python:
+- threading module: https://docs.python.org/2.7/library/threading.html
+- pprint module: https://docs.python.org/2.7/library/pprint.html
+
+Notes
+-----
+
+* How to get your TG id:
+
+>>> import telepot
+>>> bot = telepot.Bot('TG token string')
+>>> bot
+<telepot.Bot object at 0x7fc8d772df90>
+>>> response = bot.getUpdates()
+>>> response
+[]
+>>> response = bot.getUpdates()
+>>> # response will include the user id
+
+* Ideas for future developments:
+
+- add reply function, where a reply with /tweet command automatically sends the tweet to the person sending the tweet (should only work for tweet TG messages)
+
+- add tweet with image function
+
+- add a way to filter out follower messages
+
+- add logging of everything done in the bot
+
+- add database to store all past messages
+
+- add scheduling database and admin commands to schedule tweets, edit them and delete them
+
+- add better permission handling to allow retricting actions on a per user or role basis
+
+- add in-chat possibility to authorize bot against a specific Twitter account; save the credentials in the database or the file system
