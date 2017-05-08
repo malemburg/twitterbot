@@ -152,7 +152,7 @@ def run_twitter_feed(config, send_message):
 
 ###
 
-def print_twitter_feed(config):
+def print_twitter_feed(config, domain='userstream.twitter.com'):
 
     token, token_secret = twitter.read_token_file(
         config.TWITTER_USER_CREDENTIALS)
@@ -163,7 +163,7 @@ def print_twitter_feed(config):
 
     twitter_userstream = twitter.TwitterStream(
         auth=oauth,
-        domain='userstream.twitter.com')
+        domain=domain)
     for msg in twitter_userstream.user():
         print ('Message received:')
         print ('-' * 72)
