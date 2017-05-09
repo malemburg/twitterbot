@@ -117,7 +117,8 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
 
         """
         self.sender.sendMessage('TwitterBot is leaving the chat.')
-        self.twitter.run = False
+        if self.twitter is not None:
+            self.twitter.run = False
         # We should wait for the thread to terminate, but this can
         # take very long (until the user posts a new tweet), so we
         # punt on this
