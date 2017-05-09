@@ -107,6 +107,7 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
         """
         self.sender.sendMessage(
             'No activity, so terminating the bot. Bye bye.')
+        print ('Chat has been inactive for too long. Terminating chat.')
 
         # Terminate the chat in case it is idling
         raise telepot.exception.IdleTerminate(event['_idle']['seconds'])
@@ -116,6 +117,7 @@ class TwitterBotChatHandler(telepot.helper.ChatHandler):
         """ Method called when the chat is closed.
 
         """
+        print ('Chat is closing.')
         self.sender.sendMessage('TwitterBot is leaving the chat.')
         if self.twitter is not None:
             self.twitter.run = False
