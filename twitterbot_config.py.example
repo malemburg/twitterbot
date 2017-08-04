@@ -1,0 +1,41 @@
+### TwitterBot Config
+
+#
+# Rename this file to twitterbot_config.py and fill in with your
+# credentials, app name, bot name, etc.
+#
+
+APP_NAME = "AppNameOfTheTGBot"
+
+### Telegram Bot
+
+# Bot name registered with BotFather
+BOT_NAME = "tg-bot-name"
+BOT_USER = "tg-bot-user"
+
+# Bot token from TG BotFather
+TELEGRAM_BOT_TOKEN = "..."
+
+# Users authorized to use this bot; please specify the Telegram user
+# IDs as list of integers
+AUTHORIZED_USERS = [12345, # User 1
+                    23456, # User 2
+                    ]
+
+# On-idle timeout
+ON_IDLE_TIMEOUT = 60*60
+
+### Twitter App
+
+# Twitter app key
+TWITTER_CONSUMER_KEY = "..."
+
+# Twitter app secret
+TWITTER_CONSUMER_SECRET = "..."
+
+# Twitter user auth credentials file for this app; connects the app to
+# the Twitter user account using OAuth
+TWITTER_USER_CREDENTIALS = "/etc/twitterbot/user.credenials"
+# For some APIs, OAuth2 is needed, so we need a bearer token
+TWITTER_BEARER_CREDENTIALS = "/etc/twitterbot/bearer.credentials"
+
